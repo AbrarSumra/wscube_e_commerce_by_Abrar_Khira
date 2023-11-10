@@ -291,6 +291,64 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(50),
+          borderSide: BorderSide.none,
+        ),
+        backgroundColor: Colors.orange.shade800,
+        child: Image.asset(
+          "assets/pngs/house.png",
+          color: Colors.white,
+          width: 25,
+          height: 25,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        height: 70,
+        child: BottomAppBar(
+          color: Colors.white,
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 5.0,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Image.asset(
+                "assets/pngs/widget.png",
+                color: Colors.grey,
+                width: 25,
+                height: 25,
+              ),
+              IconButton(
+                icon: const Icon(
+                  CupertinoIcons.heart,
+                  color: Colors.grey,
+                  size: 25,
+                ),
+                onPressed: () {},
+              ),
+              // Add an empty container to create space for the centered button
+              const SizedBox(width: 48.0),
+              Image.asset(
+                "assets/pngs/trolley.png",
+                color: Colors.grey,
+                width: 25,
+                height: 25,
+              ),
+              Image.asset(
+                "assets/pngs/user.png",
+                color: Colors.grey,
+                width: 25,
+                height: 25,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
