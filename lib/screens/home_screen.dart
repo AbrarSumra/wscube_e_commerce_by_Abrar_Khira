@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:wscube_e_commerce/constant/icon_button.dart';
 import 'package:wscube_e_commerce/data/items_data.dart';
 import 'package:wscube_e_commerce/screens/cart_screen.dart';
+import 'package:wscube_e_commerce/screens/favourite_screen.dart';
+import 'package:wscube_e_commerce/screens/item_list_add_cart.dart';
 import 'package:wscube_e_commerce/screens/product_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,6 +15,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isFavourite = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -152,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
             GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: 10,
+              itemCount: itemPng.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 8 / 8.3,
@@ -164,12 +168,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 return InkWell(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (ctx) => ProductDetailsScreen(
-                                  name: name,
-                                  image: image,
-                                )));
+                      context,
+                      MaterialPageRoute(
+                        builder: (ctx) => ProductDetailsScreen(
+                          name: name,
+                          image: image,
+                          price: price,
+                        ),
+                      ),
+                    );
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(
@@ -200,9 +207,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  CupertinoIcons.heart,
+                                onPressed: () {
+                                  setState(() {
+                                    isFavourite = !isFavourite;
+                                    favouriteItemList[index].isFavourite =
+                                        !favouriteItemList[index].isFavourite;
+                                    if (itemList[index].isFavourite) {
+                                      favouriteItemList.add(itemList[index]);
+                                    } else {
+                                      favouriteItemList.remove(itemList[index]);
+                                    }
+                                  });
+                                },
+                                icon: Icon(
+                                  isFavourite
+                                      ? CupertinoIcons.heart_fill
+                                      : CupertinoIcons.heart,
                                   color: Colors.white,
                                   size: 18,
                                 ),
@@ -243,11 +263,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               padding: const EdgeInsets.all(10),
                               child: Row(
                                 children: [
-                                  Text(
-                                    price,
-                                    style: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
+                                  SizedBox(
+                                    width: 60,
+                                    child: Text(
+                                      price,
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(width: 20),
@@ -325,10 +348,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Container(
-        color: Colors.white,
         height: 70,
         child: BottomAppBar(
-          color: Colors.white,
+          color: Colors.transparent,
           shape: const CircularNotchedRectangle(),
           notchMargin: 5.0,
           child: Row(
@@ -347,7 +369,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.grey,
                   size: 25,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (ctx) => const FavoriteItemScreen()));
+                },
               ),
               // Add an empty container to create space for the centered button
               const SizedBox(width: 48.0),

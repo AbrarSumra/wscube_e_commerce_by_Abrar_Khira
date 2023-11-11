@@ -1,11 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wscube_e_commerce/data/items_data.dart';
+import 'package:wscube_e_commerce/screens/item_list_add_cart.dart';
 
 import '../constant/icon_button.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  List<int> itemCount = List.generate(100, (index) => 0);
+  //List<double> itemPrice = List.generate(10, (index) => 0);
+  double totalPrice = 0.00;
+
+  @override
+  void initState() {
+    setState(() {});
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +56,11 @@ class CartScreen extends StatelessWidget {
                   ),
                 ),
                 ListView.builder(
-                  itemCount: 10,
+                  itemCount: itemList.length,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (ctx, index) {
+                    final items = itemList[index];
                     return Padding(
                       padding: const EdgeInsets.only(
                           left: 20, right: 20, bottom: 20),
@@ -71,7 +88,7 @@ class CartScreen extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(15),
                                 child: Image.asset(
-                                  itemPng[index]["image"],
+                                  items.itemImage,
                                   fit: BoxFit.contain,
                                   width: 50,
                                   height: 50,
@@ -89,7 +106,7 @@ class CartScreen extends StatelessWidget {
                                       SizedBox(
                                         width: 190,
                                         child: Text(
-                                          itemPng[index]["name"],
+                                          items.itemName,
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18,
@@ -97,10 +114,16 @@ class CartScreen extends StatelessWidget {
                                         ),
                                       ),
                                       const Spacer(),
-                                      Icon(
-                                        CupertinoIcons.delete,
-                                        color: Colors.orange.shade800,
-                                        size: 20,
+                                      InkWell(
+                                        onTap: () {
+                                          itemList.remove(items);
+                                          setState(() {});
+                                        },
+                                        child: Icon(
+                                          CupertinoIcons.delete,
+                                          color: Colors.orange.shade800,
+                                          size: 20,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -120,7 +143,7 @@ class CartScreen extends StatelessWidget {
                                       SizedBox(
                                         width: 100,
                                         child: Text(
-                                          itemPng[index]["price"],
+                                          items.itemPrice,
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 15,
@@ -138,21 +161,44 @@ class CartScreen extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(30),
                                         ),
-                                        child: const Row(
+                                        child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            Icon(
-                                              CupertinoIcons.minus,
-                                              size: 15,
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  if (itemCount[index] > 0) {
+                                                    itemCount[index]--;
+                                                  }
+                                                });
+                                              },
+                                              child: const Icon(
+                                                CupertinoIcons.minus,
+                                                size: 15,
+                                              ),
                                             ),
                                             Text(
-                                              "1",
-                                              style: TextStyle(fontSize: 15),
+                                              itemCount[index].toString(),
+                                              style:
+                                                  const TextStyle(fontSize: 15),
                                             ),
-                                            Icon(
-                                              CupertinoIcons.add,
-                                              size: 15,
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  itemCount[index]++;
+                                                  /*for (int i = 0;
+                                                      i < itemCount.length;
+                                                      i++) {
+                                                    totalPrice += itemCount[i] *
+                                                        itemPng[index]["price"];
+                                                  }*/
+                                                });
+                                              },
+                                              child: const Icon(
+                                                CupertinoIcons.add,
+                                                size: 15,
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -254,19 +300,19 @@ class CartScreen extends StatelessWidget {
                     thickness: 2,
                     height: 25,
                   ),
-                  const Row(
+                  Row(
                     children: [
-                      Text(
+                      const Text(
                         "Total",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Text(
-                        "\$245.00",
-                        style: TextStyle(
+                        totalPrice.toString(),
+                        style: const TextStyle(
                           fontSize: 21,
                           fontWeight: FontWeight.bold,
                         ),

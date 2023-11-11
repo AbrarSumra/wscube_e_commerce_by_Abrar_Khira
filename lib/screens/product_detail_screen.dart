@@ -1,16 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wscube_e_commerce/constant/icon_button.dart';
+import 'package:wscube_e_commerce/screens/item_list_add_cart.dart';
 
-class ProductDetailsScreen extends StatelessWidget {
+class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({
     super.key,
     required this.name,
     required this.image,
+    required this.price,
   });
 
   final String image;
   final String name;
+  final String price;
+
+  @override
+  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+}
+
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  bool isFavourite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +59,14 @@ class ProductDetailsScreen extends StatelessWidget {
                                 const SizedBox(width: 15),
                                 IconButtonEdit(
                                   color: Colors.white,
-                                  iconData: CupertinoIcons.heart,
-                                  onTap: () {},
+                                  iconData: isFavourite
+                                      ? CupertinoIcons.heart_fill
+                                      : CupertinoIcons.heart,
+                                  onTap: () {
+                                    setState(() {
+                                      isFavourite = !isFavourite;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
@@ -60,7 +76,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(15),
                                 child: Image.asset(
-                                  image,
+                                  widget.image,
                                   fit: BoxFit.fill,
                                   height: 250,
                                   width: 250,
@@ -88,7 +104,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    name,
+                                    widget.name,
                                     style: const TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.w500,
@@ -100,9 +116,9 @@ class ProductDetailsScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          const Text(
-                                            "\$500.00",
-                                            style: TextStyle(
+                                          Text(
+                                            widget.price,
+                                            style: const TextStyle(
                                               fontSize: 24,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -274,17 +290,29 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  Container(
-                    height: 50,
-                    width: 180,
-                    decoration: BoxDecoration(
-                      color: Colors.orange.shade800,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "Add to cart",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                  InkWell(
+                    onTap: () {
+                      final addInCart = ItemAddCart(
+                        itemImage: widget.image,
+                        itemName: widget.name,
+                        itemPrice: widget.price,
+                        //itemPrice: ,
+                      );
+                      itemList.add(addInCart);
+                      setState(() {});
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 180,
+                      decoration: BoxDecoration(
+                        color: Colors.orange.shade800,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "Add to cart",
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
                       ),
                     ),
                   ),
