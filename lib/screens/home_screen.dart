@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wscube_e_commerce/constant/icon_button.dart';
@@ -16,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isFavourite = false;
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +82,52 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(height: 15),
-                  ClipRRect(
+                  CarouselSlider.builder(
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      aspectRatio: 16 / 9,
+                      autoPlayCurve: Curves.linear,
+                      autoPlayInterval: const Duration(seconds: 2),
+                      autoPlayAnimationDuration:
+                          const Duration(milliseconds: 900),
+                      viewportFraction: 1,
+                      enlargeCenterPage: true,
+                      initialPage: _currentIndex,
+                      enableInfiniteScroll: true,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _currentIndex = index;
+                        });
+                      },
+                    ),
+                    itemCount: 4,
+                    itemBuilder:
+                        (BuildContext context, int index, int realIndex) {
+                      return Image.asset("assets/images/${index + 1}.jpg");
+                    },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      4,
+                      (index) {
+                        return Container(
+                          width: 8,
+                          height: 8,
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 2),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: _currentIndex == index
+                                ? Colors.blueAccent
+                                : Colors.grey,
+                          ),
+                        );
+                      },
+                    ),
+                  )
+
+                  /*ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Image.asset(
                       "assets/images/shoes.jpeg",
@@ -88,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 180,
                       width: double.infinity,
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             ),
@@ -210,8 +257,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onPressed: () {
                                   setState(() {
                                     isFavourite = !isFavourite;
-                                    favouriteItemList[index].isFavourite =
-                                        !favouriteItemList[index].isFavourite;
+                                    itemList[index].isFavourite =
+                                        !itemList[index].isFavourite;
                                     if (itemList[index].isFavourite) {
                                       favouriteItemList.add(itemList[index]);
                                     } else {

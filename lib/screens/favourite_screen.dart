@@ -31,7 +31,7 @@ class _FavoriteItemScreenState extends State<FavoriteItemScreen> {
                       Navigator.pop(context);
                     },
                   ),
-                  const SizedBox(width: 80),
+                  const SizedBox(width: 75),
                   const Text(
                     "My Favourite",
                     style: TextStyle(
@@ -43,11 +43,11 @@ class _FavoriteItemScreenState extends State<FavoriteItemScreen> {
               ),
             ),
             ListView.builder(
-              itemCount: itemList.length,
+              itemCount: favouriteItemList.length,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (ctx, index) {
-                final items = itemList[index];
+                final items = favouriteItemList[index];
                 return Padding(
                   padding:
                       const EdgeInsets.only(left: 20, right: 20, bottom: 20),
