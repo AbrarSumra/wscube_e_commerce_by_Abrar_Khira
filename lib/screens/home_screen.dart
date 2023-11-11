@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wscube_e_commerce/constant/icon_button.dart';
 import 'package:wscube_e_commerce/data/items_data.dart';
+import 'package:wscube_e_commerce/screens/cart_screen.dart';
+import 'package:wscube_e_commerce/screens/product_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -156,133 +158,147 @@ class _HomeScreenState extends State<HomeScreen> {
                 childAspectRatio: 8 / 8.3,
               ),
               itemBuilder: (ctx, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                    bottom: 15,
-                  ),
-                  child: Container(
-                    height: 220,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(18),
+                String name = itemPng[index]["name"];
+                String image = itemPng[index]["image"];
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (ctx) => ProductDetailsScreen(
+                                  name: name,
+                                  image: image,
+                                )));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 15,
+                      right: 15,
+                      bottom: 15,
                     ),
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          top: 0,
-                          right: 0,
-                          child: Container(
-                            height: 35,
-                            width: 35,
-                            decoration: BoxDecoration(
-                              color: Colors.orange.shade800,
-                              borderRadius: const BorderRadius.only(
-                                topRight: Radius.circular(18),
-                                bottomLeft: Radius.circular(8),
-                              ),
-                            ),
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                CupertinoIcons.heart,
-                                color: Colors.white,
-                                size: 18,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 20,
-                          left: 10,
-                          child: SizedBox(
-                            height: 115,
-                            width: 150,
-                            child: Image(
-                              image: AssetImage(itemPng[index]["image"]),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 135,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              children: [
-                                Text(
-                                  itemPng[index]["name"],
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                    child: Container(
+                      height: 220,
+                      width: 300,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            top: 0,
+                            right: 0,
+                            child: Container(
+                              height: 35,
+                              width: 35,
+                              decoration: BoxDecoration(
+                                color: Colors.orange.shade800,
+                                borderRadius: const BorderRadius.only(
+                                  topRight: Radius.circular(18),
+                                  bottomLeft: Radius.circular(8),
                                 ),
-                              ],
+                              ),
+                              child: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  CupertinoIcons.heart,
+                                  color: Colors.white,
+                                  size: 18,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                        Positioned(
-                          top: 155,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Row(
-                              children: [
-                                const Text(
-                                  "\$ 120.00",
-                                  style: TextStyle(
+                          Positioned(
+                            top: 20,
+                            left: 10,
+                            child: SizedBox(
+                              height: 115,
+                              width: 150,
+                              child: Image(
+                                image: AssetImage(itemPng[index]["image"]),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: 135,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    itemPng[index]["name"],
+                                    style: const TextStyle(
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                const SizedBox(width: 20),
-                                Container(
-                                  height: 17,
-                                  width: 17,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(color: Colors.grey),
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
-                                  child: Center(
-                                    child: Container(
-                                      height: 13,
-                                      width: 13,
-                                      decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(12),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: 155,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    "\$ 120.00",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  const SizedBox(width: 20),
+                                  Container(
+                                    height: 17,
+                                    width: 17,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(color: Colors.grey),
+                                    ),
+                                    child: Center(
+                                      child: Container(
+                                        height: 13,
+                                        width: 13,
+                                        decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(width: 5),
-                                const CircleAvatar(
-                                  backgroundColor: Colors.blue,
-                                  radius: 8,
-                                ),
-                                const SizedBox(width: 5),
-                                const CircleAvatar(
-                                  backgroundColor: Colors.black,
-                                  radius: 8,
-                                ),
-                                const SizedBox(width: 5),
-                                Container(
-                                  height: 17,
-                                  width: 17,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(color: Colors.grey),
+                                  const SizedBox(width: 5),
+                                  const CircleAvatar(
+                                    backgroundColor: Colors.blue,
+                                    radius: 8,
                                   ),
-                                  child: const Center(
-                                    child: Text(
-                                      "+2",
-                                      style: TextStyle(fontSize: 9),
+                                  const SizedBox(width: 5),
+                                  const CircleAvatar(
+                                    backgroundColor: Colors.black,
+                                    radius: 8,
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Container(
+                                    height: 17,
+                                    width: 17,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(color: Colors.grey),
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        "+2",
+                                        style: TextStyle(fontSize: 9),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 );
@@ -333,11 +349,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               // Add an empty container to create space for the centered button
               const SizedBox(width: 48.0),
-              Image.asset(
-                "assets/pngs/trolley.png",
-                color: Colors.grey,
-                width: 25,
-                height: 25,
+              InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (ctx) => CartScreen()));
+                },
+                child: Image.asset(
+                  "assets/pngs/trolley.png",
+                  color: Colors.grey,
+                  width: 25,
+                  height: 25,
+                ),
               ),
               Image.asset(
                 "assets/pngs/user.png",
