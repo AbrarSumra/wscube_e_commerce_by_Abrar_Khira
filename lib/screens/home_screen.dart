@@ -160,6 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (ctx, index) {
                 String name = itemPng[index]["name"];
                 String image = itemPng[index]["image"];
+                String price = itemPng[index]["price"];
                 return InkWell(
                   onTap: () {
                     Navigator.push(
@@ -242,11 +243,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               padding: const EdgeInsets.all(10),
                               child: Row(
                                 children: [
-                                  const Text(
-                                    "\$ 120.00",
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600),
+                                  Text(
+                                    price,
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   const SizedBox(width: 20),
                                   Container(
@@ -352,7 +354,7 @@ class _HomeScreenState extends State<HomeScreen> {
               InkWell(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (ctx) => CartScreen()));
+                      MaterialPageRoute(builder: (ctx) => const CartScreen()));
                 },
                 child: Image.asset(
                   "assets/pngs/trolley.png",
