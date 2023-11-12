@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wscube_e_commerce/screens/item_list_add_cart.dart';
+import 'package:wscube_e_commerce/data/item_list_add_cart.dart';
 
 import '../constant/icon_button.dart';
 

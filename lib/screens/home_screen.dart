@@ -5,7 +5,7 @@ import 'package:wscube_e_commerce/constant/icon_button.dart';
 import 'package:wscube_e_commerce/data/items_data.dart';
 import 'package:wscube_e_commerce/screens/cart_screen.dart';
 import 'package:wscube_e_commerce/screens/favourite_screen.dart';
-import 'package:wscube_e_commerce/screens/item_list_add_cart.dart';
+import 'package:wscube_e_commerce/data/item_list_add_cart.dart';
 import 'package:wscube_e_commerce/screens/product_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,7 +16,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isFavourite = false;
+  List<bool> isFavourite = List.generate(100, (index) => false);
+
+  //bool isFavourite = false;
+
   int _currentIndex = 0;
 
   @override
@@ -264,18 +267,20 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: IconButton(
                                 onPressed: () {
                                   setState(() {
-                                    isFavourite = !isFavourite;
+                                    isFavourite[index] = !isFavourite[index];
                                     itemList[index].isFavourite =
                                         !itemList[index].isFavourite;
                                     if (itemList[index].isFavourite) {
-                                      favouriteItemList.add(itemList[index]);
+                                      favouriteItemList
+                                          .add(favouriteItemList[index]);
                                     } else {
-                                      favouriteItemList.remove(itemList[index]);
+                                      favouriteItemList
+                                          .remove(favouriteItemList[index]);
                                     }
                                   });
                                 },
                                 icon: Icon(
-                                  isFavourite
+                                  isFavourite[index]
                                       ? CupertinoIcons.heart_fill
                                       : CupertinoIcons.heart,
                                   color: Colors.white,
@@ -405,7 +410,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: Container(
+      bottomNavigationBar: SizedBox(
         height: 70,
         child: BottomAppBar(
           color: Colors.transparent,
@@ -431,7 +436,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (ctx) => const FavoriteItemScreen()));
+                          builder: (ctx) => FavouriteItemScreen()));
                 },
               ),
               // Add an empty container to create space for the centered button
