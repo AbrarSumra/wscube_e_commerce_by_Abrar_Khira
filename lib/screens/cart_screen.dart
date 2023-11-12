@@ -27,34 +27,44 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
+      appBar: AppBar(
+        backgroundColor: Colors.grey.shade200,
+        foregroundColor: Colors.grey.shade200,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(top: 10, left: 15),
+            child: CircleAvatar(
+              maxRadius: 25,
+              backgroundColor: Colors.white,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  CupertinoIcons.back,
+                  size: 30,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 100),
+          const Text(
+            "My Cart",
+            style: TextStyle(
+              fontSize: 21,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const Spacer(),
+        ],
+      ),
       body: Stack(
         children: [
           SingleChildScrollView(
             child: Column(
               children: [
                 const SizedBox(height: 25),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                  child: Row(
-                    children: [
-                      IconButtonEdit(
-                        color: Colors.white,
-                        iconData: CupertinoIcons.back,
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                      const SizedBox(width: 100),
-                      const Text(
-                        "My Cart",
-                        style: TextStyle(
-                          fontSize: 21,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
                 ListView.builder(
                   itemCount: itemList.length,
                   shrinkWrap: true,

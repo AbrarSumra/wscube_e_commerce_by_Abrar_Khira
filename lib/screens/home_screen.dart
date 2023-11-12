@@ -22,30 +22,39 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(top: 10, left: 15),
+            child: CircleAvatar(
+              maxRadius: 25,
+              backgroundColor: Colors.grey.shade200,
+              child: Image.asset(
+                "assets/pngs/menu_dots.png",
+              ),
+            ),
+          ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(top: 10, right: 15),
+            child: CircleAvatar(
+              backgroundColor: Colors.grey.shade200,
+              maxRadius: 25,
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(CupertinoIcons.bell),
+              ),
+            ),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      IconButtonEdit(
-                        color: Colors.grey.shade200,
-                        iconData: CupertinoIcons.square_grid_2x2,
-                        onTap: () {},
-                      ),
-                      const Spacer(),
-                      IconButtonEdit(
-                        color: Colors.grey.shade200,
-                        iconData: CupertinoIcons.bell,
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
                   Container(
                     height: 50,
                     width: double.infinity,
@@ -69,14 +78,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Container(
-                          height: 30,
-                          width: 1,
+                          height: 25,
+                          width: 1.5,
                           color: Colors.grey.shade400,
                         ),
                         const SizedBox(width: 10),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.filter_alt_outlined),
+                        CircleAvatar(
+                          maxRadius: 25,
+                          backgroundColor: Colors.grey.shade200,
+                          child: Image.asset(
+                            "assets/pngs/slider-navigation.png",
+                            height: 25,
+                          ),
                         ),
                       ],
                     ),
@@ -103,7 +116,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: 4,
                     itemBuilder:
                         (BuildContext context, int index, int realIndex) {
-                      return Image.asset("assets/images/${index + 1}.jpg");
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: SizedBox(
+                          width: 350,
+                          child: Image.asset(
+                            "assets/images/${index + 1}.jpg",
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      );
                     },
                   ),
                   Row(
@@ -125,21 +147,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       },
                     ),
-                  )
-
-                  /*ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Image.asset(
-                      "assets/images/shoes.jpeg",
-                      fit: BoxFit.fitWidth,
-                      height: 180,
-                      width: double.infinity,
-                    ),
-                  ),*/
+                  ),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
             SizedBox(
               height: 100,
               child: ListView.builder(
@@ -176,26 +187,22 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Column(
+              child: Row(
                 children: [
-                  Row(
-                    children: [
-                      const Text(
-                        "Special for You",
-                        style: TextStyle(
-                          fontSize: 21,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "See all",
-                          style: TextStyle(color: Colors.grey, fontSize: 15),
-                        ),
-                      ),
-                    ],
+                  const Text(
+                    "Special for You",
+                    style: TextStyle(
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Spacer(),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "See all",
+                      style: TextStyle(color: Colors.grey, fontSize: 15),
+                    ),
                   ),
                 ],
               ),
@@ -221,6 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           name: name,
                           image: image,
                           price: price,
+                          tag: index.toString(),
                         ),
                       ),
                     );
@@ -282,8 +290,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: SizedBox(
                               height: 115,
                               width: 150,
-                              child: Image(
-                                image: AssetImage(itemPng[index]["image"]),
+                              child: Hero(
+                                tag: index.toString(),
+                                child: Image(
+                                  image: AssetImage(itemPng[index]["image"]),
+                                ),
                               ),
                             ),
                           ),
