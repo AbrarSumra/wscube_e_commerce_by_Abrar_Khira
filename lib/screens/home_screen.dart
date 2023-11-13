@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wscube_e_commerce/constant/icon_button.dart';
+
 import 'package:wscube_e_commerce/data/items_data.dart';
 import 'package:wscube_e_commerce/screens/cart_screen.dart';
 import 'package:wscube_e_commerce/screens/favourite_screen.dart';

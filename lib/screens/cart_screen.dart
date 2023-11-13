@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wscube_e_commerce/data/item_list_add_cart.dart';
-import 'package:wscube_e_commerce/data/items_data.dart';
-
-import '../constant/icon_button.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
