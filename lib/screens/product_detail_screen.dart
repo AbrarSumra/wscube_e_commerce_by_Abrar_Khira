@@ -28,6 +28,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
     with SingleTickerProviderStateMixin {
   bool isFavourite = false;
   int selectedTab = 0;
+  int itemCount = 1;
   late TabController _tabController;
 
   @override
@@ -336,22 +337,39 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                       borderRadius: BorderRadius.circular(30),
                       border: Border.all(color: Colors.white, width: 2),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Icon(
-                          CupertinoIcons.minus,
-                          size: 15,
-                          color: Colors.white,
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              if (itemCount > 1) {
+                                itemCount--;
+                              }
+                            });
+                          },
+                          child: const Icon(
+                            CupertinoIcons.minus,
+                            size: 15,
+                            color: Colors.white,
+                          ),
                         ),
                         Text(
-                          "1",
-                          style: TextStyle(color: Colors.white, fontSize: 15),
+                          itemCount.toString(),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 15),
                         ),
-                        Icon(
-                          CupertinoIcons.add,
-                          size: 15,
-                          color: Colors.white,
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              itemCount++;
+                            });
+                          },
+                          child: const Icon(
+                            CupertinoIcons.add,
+                            size: 15,
+                            color: Colors.white,
+                          ),
                         ),
                       ],
                     ),
@@ -363,6 +381,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                         itemImage: widget.image,
                         itemName: widget.name,
                         itemPrice: widget.price,
+                        itemQuantity: itemCount,
                         //itemPrice: ,
                       );
                       itemList.add(addInCart);

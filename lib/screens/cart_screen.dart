@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wscube_e_commerce/data/item_list_add_cart.dart';
+import 'package:wscube_e_commerce/data/items_data.dart';
 
 import '../constant/icon_button.dart';
 
@@ -12,7 +13,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  List<int> itemCount = List.generate(100, (index) => 0);
+  List<int> itemCount = List.generate(100, (index) => 1);
   //List<double> itemPrice = List.generate(10, (index) => 0);
   double totalPrice = 0.00;
 
@@ -71,6 +72,7 @@ class _CartScreenState extends State<CartScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (ctx, index) {
                     final items = itemList[index];
+                    /*final price = items.itemQuantity * itemList[index];*/
                     return Padding(
                       padding: const EdgeInsets.only(
                           left: 20, right: 20, bottom: 20),
@@ -153,7 +155,7 @@ class _CartScreenState extends State<CartScreen> {
                                       SizedBox(
                                         width: 100,
                                         child: Text(
-                                          items.itemPrice,
+                                          items.itemPrice.toString(),
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 15,
@@ -167,7 +169,8 @@ class _CartScreenState extends State<CartScreen> {
                                         decoration: BoxDecoration(
                                           color: Colors.grey.shade200,
                                           border: Border.all(
-                                              color: Colors.grey.shade300),
+                                            color: Colors.grey.shade300,
+                                          ),
                                           borderRadius:
                                               BorderRadius.circular(30),
                                         ),
@@ -178,8 +181,8 @@ class _CartScreenState extends State<CartScreen> {
                                             InkWell(
                                               onTap: () {
                                                 setState(() {
-                                                  if (itemCount[index] > 0) {
-                                                    itemCount[index]--;
+                                                  if (items.itemQuantity > 1) {
+                                                    items.itemQuantity--;
                                                   }
                                                 });
                                               },
@@ -189,14 +192,14 @@ class _CartScreenState extends State<CartScreen> {
                                               ),
                                             ),
                                             Text(
-                                              itemCount[index].toString(),
+                                              items.itemQuantity.toString(),
                                               style:
                                                   const TextStyle(fontSize: 15),
                                             ),
                                             InkWell(
                                               onTap: () {
                                                 setState(() {
-                                                  itemCount[index]++;
+                                                  items.itemQuantity++;
                                                   /*for (int i = 0;
                                                       i < itemCount.length;
                                                       i++) {

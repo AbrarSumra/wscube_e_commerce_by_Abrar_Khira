@@ -3,11 +3,13 @@ class ItemAddCart {
     required this.itemImage,
     required this.itemName,
     required this.itemPrice,
+    required this.itemQuantity,
     this.isFavourite = false,
   });
 
   String itemName;
   String itemPrice;
+  int itemQuantity;
   String itemImage;
   bool isFavourite;
 }
