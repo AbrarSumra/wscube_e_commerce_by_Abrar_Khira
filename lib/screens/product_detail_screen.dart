@@ -375,30 +375,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                     ),
                   ),
                   const Spacer(),
-                  InkWell(
-                    onTap: () {
-                      final addInCart = ItemAddCart(
-                        itemImage: widget.image,
-                        itemName: widget.name,
-                        itemPrice: widget.price,
-                        itemQuantity: itemCount,
-                        //itemPrice: ,
-                      );
-                      itemList.add(addInCart);
-                      setState(() {});
-                    },
-                    child: Container(
-                      height: 50,
-                      width: 180,
-                      decoration: BoxDecoration(
-                        color: Colors.orange.shade800,
-                        borderRadius: BorderRadius.circular(30),
+                  SizedBox(
+                    width: 180,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        final addInCart = ItemAddCart(
+                          itemImage: widget.image,
+                          itemName: widget.name,
+                          itemPrice: widget.price,
+                          itemQuantity: itemCount,
+                          //itemPrice: ,
+                        );
+                        itemList.add(addInCart);
+                        setState(() {});
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange.shade800,
                       ),
-                      child: const Center(
-                        child: Text(
-                          "Add to cart",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
-                        ),
+                      child: const Text(
+                        "Add to cart",
+                        style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
                   ),

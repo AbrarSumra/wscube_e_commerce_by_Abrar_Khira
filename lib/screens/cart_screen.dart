@@ -69,10 +69,13 @@ class _CartScreenState extends State<CartScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (ctx, index) {
                     final items = itemList[index];
-                    /*final price = items.itemQuantity * itemList[index];*/
+
                     return Padding(
                       padding: const EdgeInsets.only(
-                          left: 20, right: 20, bottom: 20),
+                        left: 20,
+                        right: 20,
+                        bottom: 20,
+                      ),
                       child: Container(
                         height: 115,
                         width: double.infinity,
@@ -152,7 +155,7 @@ class _CartScreenState extends State<CartScreen> {
                                       SizedBox(
                                         width: 100,
                                         child: Text(
-                                          items.itemPrice.toString(),
+                                          "\$${items.itemPrice.toString()}",
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 15,
@@ -197,12 +200,6 @@ class _CartScreenState extends State<CartScreen> {
                                               onTap: () {
                                                 setState(() {
                                                   items.itemQuantity++;
-                                                  /*for (int i = 0;
-                                                      i < itemCount.length;
-                                                      i++) {
-                                                    totalPrice += itemCount[i] *
-                                                        itemPng[index]["price"];
-                                                  }*/
                                                 });
                                               },
                                               child: const Icon(
@@ -224,13 +221,14 @@ class _CartScreenState extends State<CartScreen> {
                     );
                   },
                 ),
+                const SizedBox(height: 270),
               ],
             ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: 280,
+              height: 270,
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
@@ -330,15 +328,15 @@ class _CartScreenState extends State<CartScreen> {
                     ],
                   ),
                   const SizedBox(height: 30),
-                  Container(
+                  SizedBox(
                     height: 50,
                     width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      color: Colors.orange.shade800,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: const Center(
-                      child: Text(
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange.shade800,
+                      ),
+                      child: const Text(
                         "Checkout",
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),

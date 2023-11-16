@@ -8,7 +8,7 @@ List<Map<String, dynamic>> itemData = [
     "image": "assets/images/makeup.jpg",
   },
   {
-    "title": "Women's Fashion",
+    "title": "Womens Fashion",
     "image": "assets/images/women_fashion.jpeg",
   },
   {
@@ -16,7 +16,7 @@ List<Map<String, dynamic>> itemData = [
     "image": "assets/images/jewellery.jpg",
   },
   {
-    "title": "Men's Fashion",
+    "title": "Mens Fashion",
     "image": "assets/images/man_fashion.jpg",
   },
   {
@@ -28,7 +28,7 @@ List<Map<String, dynamic>> itemData = [
     "image": "assets/images/makeup.jpg",
   },
   {
-    "title": "Women's Fashion",
+    "title": "Womens Fashion",
     "image": "assets/images/women_fashion.jpeg",
   },
   {
@@ -36,7 +36,7 @@ List<Map<String, dynamic>> itemData = [
     "image": "assets/images/jewellery.jpg",
   },
   {
-    "title": "Men's Fashion",
+    "title": "Mens Fashion",
     "image": "assets/images/man_fashion.jpg",
   },
 ];
@@ -45,51 +45,51 @@ List<Map<dynamic, dynamic>> itemPng = [
   {
     "name": "Wireless Headphones",
     "image": "assets/pngs/pngwing.com-2.png",
-    "price": "\$70.00",
+    "price": "70.00",
   },
   {
     "name": "Wireless Airbuds",
     "image": "assets/pngs/pngwing.com.png",
-    "price": "\$100.00",
+    "price": "100.00",
   },
   {
     "name": "Women Sweter",
     "image": "assets/pngs/pngwing.com-3.png",
-    "price": "\$120.00",
+    "price": "120.00",
   },
   {
     "name": "Women Top",
     "image": "assets/pngs/pngwing.com-4.png",
-    "price": "\$100.00",
+    "price": "100.00",
   },
   {
     "name": "Men Shirt",
     "image": "assets/pngs/pngwing.com-5.png",
-    "price": "\$80.00",
+    "price": "80.00",
   },
   {
     "name": "Men White Shirt",
     "image": "assets/pngs/pngwing.com-6.png",
-    "price": "\$55.00",
+    "price": "55.00",
   },
   {
     "name": "Sport Shoes",
     "image": "assets/pngs/pngwing.com-7.png",
-    "price": "\$100.00",
+    "price": "100.00",
   },
   {
     "name": "Sneakers Shoes",
     "image": "assets/pngs/pngwing.com-8.png",
-    "price": "\$125.00",
+    "price": "125.00",
   },
   {
     "name": "Make-up Kit",
     "image": "assets/pngs/pngwing.com-9.png",
-    "price": "\$113.00",
+    "price": "113.00",
   },
   {
     "name": "American Make-up",
     "image": "assets/pngs/pngwing.com-10.png",
-    "price": "\$120.00",
+    "price": "120.00",
   },
 ];

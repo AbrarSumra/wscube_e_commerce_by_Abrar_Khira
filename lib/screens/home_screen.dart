@@ -18,14 +18,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<bool> isFavourite = List.generate(100, (index) => false);
 
-  //bool isFavourite = false;
-
   int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         actions: [
           Padding(
             padding: const EdgeInsets.only(top: 10, left: 15),
@@ -329,7 +328,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   SizedBox(
                                     width: 60,
                                     child: Text(
-                                      price,
+                                      "\$$price",
                                       style: const TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w600,
